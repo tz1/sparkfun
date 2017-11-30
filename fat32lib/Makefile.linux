@@ -1,0 +1,22 @@
+all: setforlinux liblinfat32.a 
+
+CFLAGS=-g -O2 -Wall $(DFLAGS)
+CC=gcc
+
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $@
+
+MAP=-Wl,"-Map" -Wl,"$@.map" -Wl,"--cref"
+
+setforlinux:
+	make -f Makefile clean
+	touch setforlinux
+	rm -f setforavr
+
+clean:
+	rm -f *.hex *.eep *.elf *.lss *.sym *.dsm *.o *.d
+
+mount.o fat32data.o getdirent.o creat.o deltrunc.o write.o read.o seek.o: fat32.h fat32private.h
+
+liblinfat32.a: mount.o fat32data.o getdirent.o creat.o deltrunc.o write.o read.o seek.o
+	ar r $@ $^

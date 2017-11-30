@@ -1,0 +1,18 @@
+dirty buffer flag for RMW - write only when needed, validate RMW fully/properly
+Incrementing time (find latest, keep adding 2 seconds for sort order).
+Double buffer for sector (fill one while pulling from other).
+typedef int to something?
+max file size - if using auto-create log, auto create next log
+
+Iterator pattern duplicated in opendir and creat.
+
+if directory empty allow rmdir
+   check for empty, save . and .. cluster num, delete dir as file, cd .., find . cluster, 0xe5 ent.
+
+newlog naming template, else max, [0-9A-Z], so FFFFFFFF would do hex, 99999999 would do decimal, ZZZZZZZZ would do all, "FFFF    " would limit to 4 chars.
+
+rename (and/or move in tree) (technically writing the directory, chk for dup name)
+
+optional clear new linked clusters (takes time but log will be cleaner on crash
+zaphint to fixhint with correct values
+use first free hint to level writing, but when full will need wrap end detect.

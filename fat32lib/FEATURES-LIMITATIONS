@@ -1,0 +1,19 @@
+Uses only one 512 byte buffer for all sector operations, minimal extra
+generally endian agnostic (I think I got all cases, need to test).
+34 state bytes total, a few more for date and such
+no configuration #ifdefs (I may add some)
+SD and SDHC support.  Probably MMC but you might need to slow down the SPI during initial startup
+handles extended partitions. (option)
+Library so only adds required code.
+Creation date and time can be set (2 sec resolution), and will increment
+  by 2 seconds for each new file so at least they will be sortable by date to some extent.
+
+FAT32 ONLY (no fat16 or fat12)
+One file, but limited read/mod/write and seek
+does not remove directories, but can delete and truncate files
+(not fully tested) will delete long filename entries for file (option)
+Only handles DOS 8.3 short filenames
+Limited error checking (if a call fails, don't call the successor)
+
+SD/HC/XC supports write protect and passwords.
+mount will return 1 for a locked card.

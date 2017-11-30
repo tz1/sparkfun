@@ -1,0 +1,5 @@
+write a single line (with end of line) with the selected baud rate to HYPERLOG.CFG in the root directory.
+
+A Break condition will flush and sync the file.  There is also a flush timeout.
+
+New files will be created into a directory (will be created) called HYPERLOG off the root.

@@ -1,0 +1,15 @@
+newlog naming template, 3 for extension, else max, [0-9A-Z], so FFFFFFFF would do hex, 99999999 would do decimal, ZZZZZZZZ would do all, "FFFF    " would limit to 4 chars.
+
+New cluster and link cluster should only do one read then write instead of r w r w.
+dirty buffer flag for RMW - write only when needed, validate RMW fully/properly
+typedef int to something?
+max file size - if using auto-create log, auto create next log
+
+if directory empty allow rmdir
+   check for empty, save . and .. cluster num, delete dir as file, cd .., find . cluster, 0xe5 ent.
+
+rename (and/or move in tree) (technically writing the directory, chk for dup name)
+
+optional clear new linked clusters (takes time but log will be cleaner on crash
+zaphint to fixhint with correct values
+use first free hint to level writing, but when full will need wrap end detect.
